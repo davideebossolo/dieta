@@ -1,0 +1,94 @@
+<!-- public/inserisci.html -->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Inserisci un Pasto</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    input, textarea, button { display: block; margin-bottom: 15px; width: 100%; padding: 8px; }
+    .success { color: green; }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Inserisci un nuovo Pasto</h1>
+
+  <form id="pastoForm">
+    <label>Nome del Pasto:</label>
+    <input type="text" id="pasto" required />
+
+    <label>Nome Ricetta:</label>
+    <input type="text" id="nomeRicetta" required />
+
+    <label>Ingredienti (formato: nome:quantità, uno per riga):</label>
+    <textarea id="ingredienti" rows="6" placeholder="es: lattuga_romana: 150g"></textarea>
+
+    <label>Valori nutrizionali approssimativi:</label>
+    <input type="number" id="calorie" placeholder="Calorie" required />
+    <input type="text" id="proteine" placeholder="Proteine (es: 20g)" required />
+    <input type="text" id="carboidrati" placeholder="Carboidrati (es: 30g)" required />
+    <input type="text" id="grassi" placeholder="Grassi (es: 10g)" required />
+
+    <label>Note (opzionale):</label>
+    <textarea id="note" rows="4"></textarea>
+
+    <button type="submit">Invia</button>
+  </form>
+
+  <div id="risultato"></div>
+
+  <script>
+    document.getElementById('pastoForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const ingredienteLines = document.getElementById('ingredienti').value.trim().split('\n');
+      const ingredienti = {};
+      ingredienteLines.forEach(line => {
+        const [nome, quantita] = line.split(':').map(s => s.trim());
+        if (nome && quantita) ingredienti[nome] = quantita;
+      });
+
+      const body = {
+        pasto: document.getElementById('pasto').value,
+        portate: [
+          {
+            nome_ricetta: document.getElementById('nomeRicetta').value,
+            ingredienti,
+            valori_nutrizionali_approssimativi: {
+              calorie: parseInt(document.getElementById('calorie').value),
+              proteine: document.getElementById('proteine').value,
+              carboidrati: document.getElementById('carboidrati').value,
+              grassi: document.getElementById('grassi').value,
+            }
+          }
+        ],
+        valori_nutrizionali_totali: {
+          calorie: parseInt(document.getElementById('calorie').value),
+          proteine: document.getElementById('proteine').value,
+          carboidrati: document.getElementById('carboidrati').value,
+          grassi: document.getElementById('grassi').value,
+        },
+        note: document.getElementById('note').value
+      };
+
+      try {
+        const res = await fetch("/api/ricette", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        });
+
+        const risultato = document.getElementById('risultato');
+        if (res.ok) {
+          risultato.innerHTML = `<p class="success">✅ Pasto salvato con successo!</p>`;
+        } else {
+          risultato.innerHTML = `<p class="error">❌ Errore durante il salvataggio.</p>`;
+        }
+      } catch (err) {
+        document.getElementById('risultato').innerHTML = `<p class="error">❌ Connessione fallita: ${err.message}</p>`;
+      }
+    });
+  </script>
+</body>
+</html>

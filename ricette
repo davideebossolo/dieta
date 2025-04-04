@@ -1,0 +1,58 @@
+{
+    "pasto": "Pranzo completo con Caesar Salad",
+    "portate": [
+      {
+        "nome_ricetta": "Caesar Salad Light per Davide",
+        "ingredienti": {
+          "lattuga_romana": "150g",
+          "spinaci_freschi": "50g",
+          "petto_di_pollo_grigliato": "200g",
+          "parmigiano_reggiano": "15g",
+          "crostini_integrali": "40g",
+          "olio_extravergine_oliva": "1 cucchiaio",
+          "succo_limone": "1 cucchiaio",
+          "pepe_nero": "q.b.",
+          "salsa_leggera": {
+            "yogurt_greco_0%": "1 cucchiaio",
+            "senape": "1 cucchiaino",
+            "filetto_acciuga": "0.5 (facoltativo)",
+            "limone_spremuto": "qualche goccia"
+          }
+        },
+        "valori_nutrizionali_approssimativi": {
+          "calorie": 520,
+          "proteine": "45g",
+          "carboidrati": "25g",
+          "grassi": "25g"
+        }
+      },
+      {
+        "nome_ricetta": "Succo di frutta 100%",
+        "quantità": "200 ml",
+        "valori_nutrizionali_approssimativi": {
+          "calorie": 90,
+          "proteine": "1g",
+          "carboidrati": "22g",
+          "grassi": "0g"
+        }
+      },
+      {
+        "nome_ricetta": "Pane in cassetta con crema Novi",
+        "quantità": "4 fette di pane in cassetta + 20g di crema Novi",
+        "valori_nutrizionali_approssimativi": {
+          "calorie": 320,
+          "proteine": "7g",
+          "carboidrati": "40g",
+          "grassi": "15g"
+        }
+      }
+    ],
+    "valori_nutrizionali_totali": {
+      "calorie": 930,
+      "proteine": "53g",
+      "carboidrati": "87g",
+      "grassi": "40g"
+    },
+    "note": "Questo pranzo sostituisce una delle opzioni standard della tua dieta (es. opzione 1 o 3), mantenendo il bilancio tra macronutrienti e le componenti dolci previste nel piano."
+  }
+  
